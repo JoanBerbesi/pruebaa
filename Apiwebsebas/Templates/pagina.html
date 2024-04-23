@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Animales</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .home-container {
+            text-align: center;
+        }
+        .home-container h1 {
+            margin-bottom: 20px;
+        }
+        .home-container p {
+            margin-bottom: 20px;
+        }
+        .home-container button {
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            text-decoration: none;
+        }
+        .home-container button:hover {
+            background-color: #45a049;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            margin: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .pet {
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .pet img {
+            width: 100%;
+            border-radius: 5px;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+
+
+        <div class="container">
+            <div class="pet">
+                <img src="https://2.bp.blogspot.com/-Hg_AOGT4Oss/UybWRU5EFDI/AAAAAAAAuAQ/E9PuD3Cce5w/s1600/Selfies+Gatos++divertidos+fotos+(1).jpeg" alt="Mascota 1">
+            </div>
+            <div class="pet">
+                <img src="https://i.pinimg.com/originals/1d/84/36/1d8436ad0603bea560b177712df7acea.jpg" alt="Mascota 2">
+            </div>
+            <div class="pet">
+                <img src="https://th.bing.com/th/id/OIP.TeP9JNb7odufIXrkzc7KIQAAAA?rs=1&pid=ImgDetMain" alt="Mascota 3">
+            </div>
+       
+        </div>
+
+        <h1>Catálogo de Animales</h1>
+       
+        <div aria-orientation="horizontal">
+            <input type="button" value="logout" id="logout">
+            <input type="button" value="Borrar Cuenta" id="deleteAcc">
+        </div>
+        <div>
+            <div id="confirmar_delete" style="display: none;">
+                <p>¿Está seguro de que desea eliminar su cuenta?</p>
+                <button id="bntBorrarCuenta">Sí, eliminar cuenta</button>
+                <button onclick="noBorrar()">Cancelar</button>
+            </div>
+        </div>
+    </header>
+    <main id="mainContent">
+      
+    </main>
+
+    <script>
+       
+
+       
+        function mostrarCatalogo() {
+            const mainContent = document.getElementById('mainContent');
+            mainContent.innerHTML = ''; 
+
+            animales.forEach(animal => {
+                const animalElement = document.createElement('div');
+                animalElement.classList.add('animal');
+                animalElement.innerHTML = `<h2>${animal.nombre}</h2><p>Tipo: ${animal.tipo}</p>`;
+                mainContent.appendChild(animalElement);
+            });
+        }
+
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            mostrarCatalogo();
+
+  
+            const btnLogout = document.getElementById('logout');
+            btnLogout.addEventListener('click', () => {
+                
+                window.location.href = '../index.html';
+            });
+        });
+
+        function noBorrar() {
+            document.getElementById("confirmar_delete").style.display = "none";
+        }
+
+        document.getElementById("deleteAcc").addEventListener("click", async function (event) {
+            document.getElementById("confirmar_delete").style.display = "block";
+        });
+    </script>
+    <script type="module" src="../controllers/pagina.js"></script>
+</body>
+</html>

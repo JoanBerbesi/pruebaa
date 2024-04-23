@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+        crossorigin="anonymous"></script>
+    <script type="module" src="/controllers/regist.js"></script>
+</head>
+
+<body>
+    <div id="registrarme">
+        <h2>Regístrate</h2>
+        <input type="text" placeholder="Correo" id="mail" required>
+        <input type="text" placeholder="Confirma Correo" id="mailc" required>
+        <input type="password" placeholder="Tu Contraseña" id="pass" required>
+        <input type="password" placeholder="Confirma contraseña" id="passc" required>
+        <div id="err" style="color: rgb(0, 0, 0);"></div>
+        <button type="submit" id="btnRegist">Registrarse</button>
+        <br>
+        <br>
+        <button type="button" class="btn btn-primary">Registrate sesión con Google</button>
+        <br>
+        <br>
+        <button type="button" class="btn btn-primary">Registrate sesión con Facebook</button>
+    </div>
+
+    <script>
+        document.getElementById("btnRegist").addEventListener("click", async function (event) {
+            var em = document.getElementById("mail").value;
+            var emConfirm = document.getElementById("mailc").value;
+            var pass = document.getElementById("pass").value;
+            var passConfirm = document.getElementById("passc").value;
+
+            var error = "";
+            var errorText = document.getElementById("err");
+            errorText.innerHTML = "";
+
+            if (em === "" || emConfirm === "" || pass === "" || passConfirm === "") {
+                error += "Los campos son obligatorios";
+            }
+            else if (em.indexOf("@") === -1) {
+                error += "El correo no es válido";
+            }
+            else if (em !== emConfirm) {
+                error += "Los correos no coinciden";
+            }
+            else if (pass.length < 8 || passConfirm.length < 8) {
+                error += "La contraseña debe tener al menos 8 caracteres";
+            }
+            else if (pass !== passConfirm) {
+                error += "Las contraseñas no coinciden";
+            }
+            else if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+])[A-Za-z!@#$%^&*()_+]/.test(pass)) {
+                error += "La contraseña debe tener una mayúscula, una minúscula y un caracter especial.";
+            }
+
+            if (error !== "") {
+                errorText.innerHTML = error;
+                event.preventDefault();
+            } else {
+                window.pase = true;
+            }
+        });
+    </script>
+
+</body>
+
+</html>
